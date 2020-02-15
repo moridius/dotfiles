@@ -1,0 +1,13 @@
+browser             "~/scripts/urlopen %u"
+save-path           "~/Downloads/"
+download-path       "~/Downloads/"
+refresh-on-startup  no
+auto-reload         yes
+reload-time         30
+#show-read-feeds    no
+bind-key            j   next
+bind-key            k   prev
+bind-key            J   next-feed
+bind-key            K   prev-feed
+bind-key            g  home
+bind-key            G   end
