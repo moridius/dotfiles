@@ -23,3 +23,5 @@ plugin "https://github.com/itchyny/lightline.vim"
 plugin "https://github.com/junegunn/fzf.vim"
 plugin "https://github.com/racer-rust/vim-racer.git"
 plugin "https://github.com/Shougo/deoplete.nvim.git"
+
+nvim -c UpdateRemotePlugins -c q
