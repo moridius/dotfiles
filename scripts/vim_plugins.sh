@@ -13,6 +13,7 @@ plugin()
 }
 
 
+plugin "https://github.com/airblade/vim-rooter.git"
 plugin "https://github.com/Arkham/vim-tango.git"
 plugin "https://github.com/cespare/vim-toml.git"
 plugin "https://github.com/dag/vim-fish.git"
@@ -21,7 +22,9 @@ plugin "https://github.com/editorconfig/editorconfig-vim.git"
 plugin "https://github.com/godlygeek/tabular"
 plugin "https://github.com/itchyny/lightline.vim"
 plugin "https://github.com/junegunn/fzf.vim"
+plugin "https://github.com/machakann/vim-highlightedyank.git"
 plugin "https://github.com/racer-rust/vim-racer.git"
 plugin "https://github.com/Shougo/deoplete.nvim.git"
+
 
 nvim -c UpdateRemotePlugins -c q
