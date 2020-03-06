@@ -26,46 +26,42 @@ function fish_mode_prompt
         switch $fish_bind_mode
             case default
                 set mode_indicator " N "
-                set color_a afd700 185f00
-                set color_b 585858 ffffff
-                set color_c 303030 ffffff
-                set color_d normal 303030
+                set color_a "\e[0m\e[38;5;8m\e[48;5;4m\e[1m"
+                set color_b "\e[0m\e[38;5;7m\e[48;5;237m"
+                set color_c "\e[0m\e[38;5;7m\e[48;5;235m"
+                set color_d "\e[0m\e[38;5;235m"
             case insert
                 set mode_indicator " I "
-                set color_a ffffff 005f5f
-                set color_b 0087af f4fce2
-                set color_c 005f87 f4fce2
-                set color_d normal 005f87
+                set color_a "\e[0m\e[38;5;8m\e[48;5;2m\e[1m"
+                set color_b "\e[0m\e[38;5;7m\e[48;5;237m"
+                set color_c "\e[0m\e[38;5;7m\e[48;5;235m"
+                set color_d "\e[0m\e[38;5;235m"
             case replace_one
                 set mode_indicator " R "
-                set color_a aaff00 185f00
-                set color_b aaaa00 185f00
-                set color_c 303030 ffffff
-                set color_d normal 303030
+                set color_a "\e[0m\e[38;5;8m\e[48;5;16m\e[1m"
+                set color_b "\e[0m\e[38;5;7m\e[48;5;237m"
+                set color_c "\e[0m\e[38;5;7m\e[48;5;235m"
+                set color_d "\e[0m\e[38;5;235m"
             case visual
                 set mode_indicator " V "
-                set color_a ff8700 870000
-                set color_b 585858 ffffff
-                set color_c 303030 ffffff
-                set color_d normal 303030
+                set color_a "\e[0m\e[38;5;8m\e[48;5;16m\e[1m"
+                set color_b "\e[0m\e[38;5;7m\e[48;5;237m"
+                set color_c "\e[0m\e[38;5;7m\e[48;5;235m"
+                set color_d "\e[0m\e[38;5;235m"
         end
     end
 
-    set_color --bold --background $color_a[1] $color_a[2]
-    echo "$mode_indicator"
+    echo -e "$color_a$mode_indicator"
     if [ "$last_status" != "0" ]
         set_color --background ff0000 f4fce2
         echo -n " $last_status "
     end
-    set_color --background $color_b[1] $color_b[2]
-    echo -n " $USER "
-    set_color --background $color_c[1] $color_c[2]
-    echo -n " "
+    echo -e -n "$color_b $USER "
+    echo -e -n "$color_c "
     echo -n (pwd | sed "s!/home/$USER!~!g" | sed -E "s!/(.).*/!/\1/!g")
     echo -n " "
-    set_color --background $color_d[1] $color_d[2]
-    echo -n "┃ "
-    set_color normal
+    echo -e -n "$color_d┃ "
+    echo -e "\e[0m"
 
     if [ $CMD_DURATION -gt 2000 ]
         echo -ne '\007'
@@ -188,6 +184,10 @@ bind -M insert \cf fzf_search
 source ~/scripts/ssh-agent.fish 2>/dev/null
 source ~/.config/fish/config.local 2>/dev/null
 
+# Base16 Shell
+if status --is-interactive
+    source "$HOME/scripts/base16-shell/profile_helper.fish"
+end
 if status is-interactive && not set -q TMUX
     exec tmux
 end

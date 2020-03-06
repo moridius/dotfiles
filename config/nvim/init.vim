@@ -30,7 +30,9 @@ imap <c-s> <Esc>:w<CR>
 
 inoremap jj <Esc>
 
-colorscheme tango
+let base16colorspace=256
+colorscheme base16-black-metal-bathory
+let g:lightline = { 'colorscheme': 'base16_black_metal_bathory' }
 
 nnoremap j gj
 nnoremap k gk
@@ -60,8 +62,8 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " let g:fzf_files_options = '--preview "(pygmentize {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 let $FZF_DEFAULT_COMMAND = 'fd --type f --exclude target --exclude Cargo.lock --exclude __pycache__'
-nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>f :Files<cr>
+nnoremap <leader>b :w<cr>:Buffers<cr>
+nnoremap <leader>f :w<cr>:Files<cr>
 nnoremap <leader>g :Rg<cr>
 
 " ALE
