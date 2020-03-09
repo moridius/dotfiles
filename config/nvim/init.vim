@@ -21,6 +21,9 @@ set listchars=tab:→\ ,space:·
 set undofile
 set undodir=~/.local/share/nvim/undo
 
+set ignorecase
+set smartcase
+
 let mapleader = " "
 nnoremap <leader><leader> :w<CR><c-^>
 nnoremap <leader>d :ALEGoToDefinition<cr>
