@@ -25,11 +25,11 @@ set ignorecase
 set smartcase
 
 let mapleader = " "
-nnoremap <leader><leader> :w<CR><c-^>
+nnoremap <leader><leader> :up<CR><c-^>
 nnoremap <leader>d :ALEGoToDefinition<cr>
 
-nmap <c-s> :w<CR>
-imap <c-s> <Esc>:w<CR>
+nmap <c-s> :up<CR>
+imap <c-s> <Esc>:up<CR>
 
 inoremap jj <Esc>
 
@@ -65,8 +65,8 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " let g:fzf_files_options = '--preview "(pygmentize {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 let $FZF_DEFAULT_COMMAND = 'fd --type f --exclude target --exclude Cargo.lock --exclude __pycache__'
-nnoremap <leader>b :w<cr>:Buffers<cr>
-nnoremap <leader>f :w<cr>:Files<cr>
+nnoremap <leader>b :up<cr>:Buffers<cr>
+nnoremap <leader>f :up<cr>:Files<cr>
 nnoremap <leader>g :Rg<cr>
 
 " ALE

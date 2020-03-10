@@ -68,82 +68,6 @@ function fish_mode_prompt
     end
 end
 
-function fish_prompt_old
-    set last_status $status
-    if [ $COLUMNS -lt 20 ]
-        echo "> "
-    else
-        set_color 666666
-        echo -n (date "+%H:%M ")
-        if [ "$last_status" != "0" ]
-            set_color red
-            echo -n "$last_status "
-        end
-        set_color DDDDDD
-        echo -n "$USER "
-        if [ $COLUMNS -ge 50 ]
-            set_color green
-            echo -n (pwd | sed "s!/home/$USER!~!g" | sed -E "s!/(.).*/!/\1/!g")
-            set_color normal
-        else
-            echo ""
-        end
-        echo -n "> "
-        if [ $CMD_DURATION -gt 10000 ]
-            echo -ne '\007'
-        end
-    end
-end
-
-function fish_mode_prompt_old
-    # Do nothing if not in vi mode
-    if test "$fish_key_bindings" = "fish_vi_key_bindings"
-        or test "$fish_key_bindings" = "fish_hybrid_key_bindings"
-        switch $fish_bind_mode
-            case default
-                set_color --bold --background red white
-                echo 'N'
-            case insert
-                set_color --bold --background green white
-                echo 'I'
-            case replace_one
-                set_color --bold --background green white
-                echo 'R'
-            case visual
-                set_color --bold --background magenta white
-                echo 'V'
-        end
-        set_color normal
-        echo -n ' '
-    end
-end
-
-function fish_right_prompt
-    if [ (tput cols) -ge 50 ]
-        set file "/tmp/weddingpi"
-        set_color grey
-        echo -n "[Pi: "
-        if [ ! -f "$file" ]
-            set_color red
-            echo -n "?"
-        else
-            if grep -sq "0" "$file"
-                set_color green
-                echo -n "OK"
-            else if grep -sq "1" "$file"
-                set_color red
-                echo -n "NOK"
-            else
-                set_color red
-                echo -n "?"
-            end
-        end
-        set_color grey
-        echo -n "]"
-        set_color normal
-    end
-end
-
 function cl
     if [ -d $argv[1] ]
         cd $argv[1]
@@ -179,15 +103,10 @@ end
 
 bind -M insert \cf fzf_search
 
-/usr/bin/eject -i on /dev/sr0 >/dev/null 2>&1
-
 source ~/scripts/ssh-agent.fish 2>/dev/null
 source ~/.config/fish/config.local 2>/dev/null
 
 # Base16 Shell
-if status --is-interactive
-    source "$HOME/scripts/base16-shell/profile_helper.fish"
-end
-if status is-interactive && not set -q TMUX
-    exec tmux
-end
+#if status --is-interactive
+#    source "$HOME/scripts/base16-shell/profile_helper.fish"
+#end
