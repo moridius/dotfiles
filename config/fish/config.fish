@@ -106,7 +106,9 @@ bind -M insert \cf fzf_search
 source ~/scripts/ssh-agent.fish 2>/dev/null
 source ~/.config/fish/config.local 2>/dev/null
 
-# Base16 Shell
+# colours
+set -gx BASE16_THEME base16-3024
 if status --is-interactive
-    source "$HOME/scripts/base16-shell/profile_helper.fish"
+    set -gx BASE16_THEME_ (echo "$BASE16_THEME" | tr '-' '_')
+    eval sh "$HOME/scripts/base16-shell/scripts/$BASE16_THEME.sh"
 end

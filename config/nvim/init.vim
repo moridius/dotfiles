@@ -87,9 +87,8 @@ let g:deoplete#sources = {'rust': ['racer']}
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  let g:lightline = {}
-  let g:lightline.colorscheme = "base16_3024"
-  source ~/.vimrc_background
-endif
+" colours
+let base16colorspace=256
+colorscheme $BASE16_THEME
+let g:lightline = {}
+let g:lightline.colorscheme = $BASE16_THEME_
