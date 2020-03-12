@@ -107,6 +107,6 @@ source ~/scripts/ssh-agent.fish 2>/dev/null
 source ~/.config/fish/config.local 2>/dev/null
 
 # Base16 Shell
-#if status --is-interactive
-#    source "$HOME/scripts/base16-shell/profile_helper.fish"
-#end
+if status --is-interactive
+    source "$HOME/scripts/base16-shell/profile_helper.fish"
+end

@@ -33,10 +33,6 @@ imap <c-s> <Esc>:up<CR>
 
 inoremap jj <Esc>
 
-let base16colorspace=256
-colorscheme base16-black-metal-bathory
-let g:lightline = { 'colorscheme': 'base16_black_metal_bathory' }
-
 nnoremap j gj
 nnoremap k gk
 
@@ -90,3 +86,10 @@ let g:deoplete#sources = {'rust': ['racer']}
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  let g:lightline = {}
+  let g:lightline.colorscheme = "base16_3024"
+  source ~/.vimrc_background
+endif
