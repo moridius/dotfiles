@@ -3,10 +3,16 @@ set -x VISUAL /usr/bin/nvim
 
 functions --copy cd __fish_cd
 function cd
-    __fish_cd $argv
-    if [ $status -eq 0 ]
-        pwd > /tmp/last_cd
+    if [ "$argv[1]" = "" ]
+       set dir (fd -t d | fzf)
+    else
+        set dir "$argv[1]"
     end
+    __fish_cd $dir && pwd > /tmp/last_cd
+end
+
+function cl
+    cd $argv[1] && ls
 end
 
 function last_cd
@@ -65,17 +71,6 @@ function fish_mode_prompt
 
     if [ $CMD_DURATION -gt 2000 ]
         echo -ne '\007'
-    end
-end
-
-function cl
-    if [ -d $argv[1] ]
-        cd $argv[1]
-        ls
-        return 0
-    else
-        echo "Directory does not exist." >&2
-        return 1
     end
 end
 
