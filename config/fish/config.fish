@@ -8,7 +8,10 @@ function cd
     else
         set dir "$argv[1]"
     end
-    __fish_cd $dir && pwd > /tmp/last_cd
+
+    if [ "$dir" != "" ]
+        __fish_cd $dir && pwd > /tmp/last_cd
+    end
 end
 
 function cl
