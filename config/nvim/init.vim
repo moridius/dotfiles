@@ -24,6 +24,9 @@ set undodir=~/.local/share/nvim/undo
 set ignorecase
 set smartcase
 
+nmap <F1> :echo<CR>
+imap <F1> <C-o>:echo<CR>
+
 let mapleader = " "
 nnoremap <leader><leader> :up<CR><c-^>
 nnoremap <leader>d :ALEGoToDefinition<cr>
