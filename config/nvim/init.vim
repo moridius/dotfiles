@@ -85,7 +85,7 @@ let g:ale_rust_cargo_use_clippy = 1
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources = {'rust': ['racer']}
+let g:deoplete#custom#option = {'rust': ['racer']}
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
