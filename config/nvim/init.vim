@@ -51,6 +51,9 @@ vnoremap ad "+d
 nnoremap add "+dd
 vnoremap add "+dd
 
+nmap <leader>c :Commentary<CR>
+vmap <leader>c :Commentary<CR>
+
 set scrolloff=5
 
 " remove trailing whitespaces on save

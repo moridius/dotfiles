@@ -27,6 +27,7 @@ plugin "https://github.com/machakann/vim-highlightedyank.git"
 plugin "https://github.com/mike-hearn/base16-vim-lightline.git"
 plugin "https://github.com/racer-rust/vim-racer.git"
 plugin "https://github.com/Shougo/deoplete.nvim.git"
+plugin "https://github.com/tpope/vim-commentary.git"
 
 
 nvim -c UpdateRemotePlugins -c q
