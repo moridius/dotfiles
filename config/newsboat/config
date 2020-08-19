@@ -1,10 +1,14 @@
 browser             "~/scripts/urlopen %u"
 save-path           "~/Downloads/"
-download-path       "~/Downloads/"
+download-path       "~/Downloads/podcasts/"
+max-downloads       1
+player              "~/scripts/podplay"
+podlist-format      "%4i [%6dMB/%6tMB] [%5p %%] [%12K] %-20S %b"
 refresh-on-startup  no
 auto-reload         yes
 reload-time         30
 #show-read-feeds    no
+feed-sort-order     lastupdated
 bind-key            j   next
 bind-key            k   prev
 bind-key            J   next-feed
