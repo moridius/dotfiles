@@ -34,6 +34,8 @@ nnoremap <leader>d :ALEGoToDefinition<cr>
 nmap <c-s> :up<CR>
 imap <c-s> <Esc>:up<CR>
 
+inoremap <leader><Tab> <c-v><Tab>
+
 inoremap jj <Esc>
 
 nnoremap j gj
