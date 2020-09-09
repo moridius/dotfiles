@@ -22,6 +22,8 @@
 !/config/zathura/zathurarc
 !/.gitignore
 !/scripts
+!/scripts/csv2md
+!/scripts/md2csv
 !/scripts/open_terminal
 !/scripts/reconfigure_i3
 !/scripts/vim_plugins.sh
