@@ -12,7 +12,7 @@ if __name__ == "__main__":
     output = ""
 
     try:
-        if args.input:
+        if args.input and args.input != "-":
             f = open(args.input, 'r')
         else:
             print("Reading from stdin...", file=sys.stderr)
