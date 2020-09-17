@@ -5,6 +5,8 @@ import sys
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Converts a Markdown table into a CSV file")
+    parser.add_argument("-d", "--delimiter", nargs='?', default=',', help="CSV column delimiter")
+    parser.add_argument("-q", "--quotechar", nargs='?', default='"', help="CSV quote character")
     parser.add_argument("input", nargs='?', help="Input file")
     parser.add_argument("output", nargs='?', help="Output file")
     args = parser.parse_args()
@@ -32,15 +34,21 @@ if __name__ == "__main__":
 
             first = True
             for cell in row.split("|"):
-                cell = cell.strip().replace('"', "'")
-                if "," in cell:
-                    cell = '"' + cell + '"'
+                cell = cell.strip()
+
+                if args.quotechar == '"':
+                    cell = cell.replace('"', "'")
+                else:
+                    cell = cell.replace(args.quotechar, "")
+
+                if args.delimiter in cell:
+                    cell = args.quotechar + cell + args.quotechar
 
                 if first:
                     first = False
                     output += cell
                 else:
-                    output += "," + cell
+                    output += args.delimiter + cell
 
             output += "\n"
     finally:

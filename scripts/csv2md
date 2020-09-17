@@ -6,6 +6,8 @@ import sys
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Converts a CSV file into a Markdown table")
+    parser.add_argument("-d", "--delimiter", nargs='?', default=',', help="CSV column delimiter")
+    parser.add_argument("-q", "--quotechar", nargs='?', default='"', help="CSV quote character")
     parser.add_argument("input", nargs='?', help="Input file")
     parser.add_argument("output", nargs='?', help="Output file")
     args = parser.parse_args()
@@ -20,7 +22,7 @@ if __name__ == "__main__":
             print("Reading from stdin...", file=sys.stderr)
             f = sys.stdin
 
-        csv_reader = csv.reader(f, delimiter=',', quotechar='"')
+        csv_reader = csv.reader(f, delimiter=args.delimiter, quotechar=args.quotechar)
         table = []
         for row in csv_reader:
             cloned_row = []
