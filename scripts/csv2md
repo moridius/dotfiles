@@ -29,7 +29,8 @@ if __name__ == "__main__":
             for i in range(len(row)):
                 width = col_width.get(i, 0)
                 col_width[i] = max(width, len(row[i]))
-                cloned_row.append(row[i])
+                cell = row[i].replace("\r", "").replace("\n", " ")
+                cloned_row.append(cell)
             table.append(cloned_row)
 
         first = True
