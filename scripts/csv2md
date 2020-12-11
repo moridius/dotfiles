@@ -5,9 +5,9 @@ import csv
 import sys
 
 
-def csv_to_md(csv_table):
+def csv_to_md(csv_table, delimiter=",", quotechar='"'):
     output = ""
-    csv_reader = csv.reader(csv_table, delimiter=args.delimiter, quotechar=args.quotechar)
+    csv_reader = csv.reader(csv_table, delimiter=delimiter, quotechar=quotechar)
     table = []
     for row in csv_reader:
         cloned_row = []
@@ -53,7 +53,7 @@ if __name__ == "__main__":
             print("Reading from stdin...", file=sys.stderr)
             f = sys.stdin
 
-        output = csv_to_md(f)
+        output = csv_to_md(f, args.delimiter, args.quotechar)
     finally:
         if args.input:
             f.close()

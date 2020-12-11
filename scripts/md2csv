@@ -4,10 +4,10 @@ import argparse
 import sys
 
 
-def md_to_csv(csv_table):
+def md_to_csv(md_table, delimiter=",", quotechar='"'):
     output = ""
 
-    for row in f:
+    for row in md_table:
         row = row.strip()
 
         if row.startswith("|-"):
@@ -57,7 +57,7 @@ if __name__ == "__main__":
         f = sys.stdin
 
     try:
-        output = md_to_csv(f)
+        output = md_to_csv(f, args.delimiter, args.quotechar)
     finally:
         if args.input:
             f.close()
