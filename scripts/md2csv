@@ -3,60 +3,69 @@
 import argparse
 import sys
 
+
+def md_to_csv(csv_table):
+    output = ""
+
+    for row in f:
+        row = row.strip()
+
+        if row.startswith("|-"):
+            continue
+
+        if row.startswith("|"):
+            row = row[1:]
+
+        if row.endswith("|"):
+            row = row[:-1]
+
+        first = True
+        for cell in row.split("|"):
+            cell = cell.strip()
+
+            if args.quotechar == '"':
+                cell = cell.replace('"', "'")
+            else:
+                cell = cell.replace(args.quotechar, "")
+
+            if args.delimiter in cell:
+                cell = args.quotechar + cell + args.quotechar
+
+            if first:
+                first = False
+                output += cell
+            else:
+                output += args.delimiter + cell
+
+        output += "\n"
+    return output
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Converts a Markdown table into a CSV file")
     parser.add_argument("-d", "--delimiter", nargs='?', default=',', help="CSV column delimiter")
     parser.add_argument("-q", "--quotechar", nargs='?', default='"', help="CSV quote character")
+    parser.add_argument("--bom", help="Write a byte order mark, for Excel compatibility")
     parser.add_argument("input", nargs='?', help="Input file")
     parser.add_argument("output", nargs='?', help="Output file")
     args = parser.parse_args()
 
-    output = ""
+    if args.input and args.input != "-":
+        f = open(args.input, 'r')
+    else:
+        print("Reading from stdin...", file=sys.stderr)
+        f = sys.stdin
 
     try:
-        if args.input and args.input != "-":
-            f = open(args.input, 'r')
-        else:
-            print("Reading from stdin...", file=sys.stderr)
-            f = sys.stdin
-
-        for row in f:
-            row = row.strip()
-
-            if row.startswith("|-"):
-                continue
-
-            if row.startswith("|"):
-                row = row[1:]
-
-            if row.endswith("|"):
-                row = row[:-1]
-
-            first = True
-            for cell in row.split("|"):
-                cell = cell.strip()
-
-                if args.quotechar == '"':
-                    cell = cell.replace('"', "'")
-                else:
-                    cell = cell.replace(args.quotechar, "")
-
-                if args.delimiter in cell:
-                    cell = args.quotechar + cell + args.quotechar
-
-                if first:
-                    first = False
-                    output += cell
-                else:
-                    output += args.delimiter + cell
-
-            output += "\n"
+        output = md_to_csv(f)
     finally:
         if args.input:
             f.close()
 
     if args.output:
         with open(args.output, 'w') as f:
+            if args.bom:
+                f.write("\ufeff")
             f.write(output)
     else:
         print(output, end="")

@@ -4,6 +4,38 @@ import argparse
 import csv
 import sys
 
+
+def csv_to_md(csv_table):
+    output = ""
+    csv_reader = csv.reader(csv_table, delimiter=args.delimiter, quotechar=args.quotechar)
+    table = []
+    for row in csv_reader:
+        cloned_row = []
+        for i in range(len(row)):
+            width = col_width.get(i, 0)
+            col_width[i] = max(width, len(row[i]))
+            cell = row[i].replace("\r", "").replace("\n", " ")
+            cloned_row.append(cell)
+        table.append(cloned_row)
+
+    first = True
+    for row in table:
+        output += "|"
+        for i in range(len(row)):
+            output += " {} |".format(row[i].ljust(col_width[i]))
+        output += "\n"
+
+        if first:
+            first = False
+            output += "|"
+            for i in range(len(row)):
+                output += "-" * (col_width[i] + 2)
+                output += "|"
+            output += "\n"
+
+    return output
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Converts a CSV file into a Markdown table")
     parser.add_argument("-d", "--delimiter", nargs='?', default=',', help="CSV column delimiter")
@@ -12,7 +44,6 @@ if __name__ == "__main__":
     parser.add_argument("output", nargs='?', help="Output file")
     args = parser.parse_args()
 
-    output = ""
     col_width = dict()
 
     try:
@@ -22,31 +53,7 @@ if __name__ == "__main__":
             print("Reading from stdin...", file=sys.stderr)
             f = sys.stdin
 
-        csv_reader = csv.reader(f, delimiter=args.delimiter, quotechar=args.quotechar)
-        table = []
-        for row in csv_reader:
-            cloned_row = []
-            for i in range(len(row)):
-                width = col_width.get(i, 0)
-                col_width[i] = max(width, len(row[i]))
-                cell = row[i].replace("\r", "").replace("\n", " ")
-                cloned_row.append(cell)
-            table.append(cloned_row)
-
-        first = True
-        for row in table:
-            output += "|"
-            for i in range(len(row)):
-                output += " {} |".format(row[i].ljust(col_width[i]))
-            output += "\n"
-
-            if first:
-                first = False
-                output += "|"
-                for i in range(len(row)):
-                    output += "-" * (col_width[i] + 2)
-                    output += "|"
-                output += "\n"
+        output = csv_to_md(f)
     finally:
         if args.input:
             f.close()
